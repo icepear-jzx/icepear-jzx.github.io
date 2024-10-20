@@ -8,29 +8,87 @@ tags: [SQL]
 This article covers basic SQL syntax along with advanced features, such as window functions, for data query (DQL).
 These concepts are frequently applied to solve common algorithmic challenges.
 
-# Basic SQL Query Syntax
+# Basic Syntax
 
 ## SELECT
 
+`SELECT` is used to retrieve data from one or more tables.
+
+Select specific columns:
+
+```mysql
+SELECT column1, column2, ... FROM table_name;
+```
+
+Select all columns:
+
+```mysql
+SELECT * FROM table_name;
+```
+
+Rename columns in the result using `AS`:
+
+```mysql
+SELECT column_name AS new_column_name FROM table_name;
+```
+
 ## FROM
 
-# Operators
+`FROM` specifies the table from which to retrieve the data.
 
-## Arithmetic Operators
+Select data from a single table:
 
-## Comparison Operators
+```mysql
+SELECT * FROM table_name;
+```
 
-## Logical Operators
+Select data from multiple tables:
 
-## String Operators
+```mysql
+SELECT * FROM table1, table2;
+```
 
-# Filtering Data
+This will create a Cartesian product (a.k.a. [`CROSS JOIN`](#cross-join)), meaning every row from `table1` will be paired with every row from `table2`.
+
+> Note: The Cartesian product is rarely used intentionally in real-world queries because it can result in a very large result set, especially for large tables.
+> It's generally better to use `JOIN` if there's a logical connection between the tables.
+
+# Filtering
 
 ## WHERE
 
+`WHERE` is used to filter records that meet certain conditions.
+
+```mysql
+SELECT * FROM table_name
+WHERE conditions;
+```
+
+The `conditions` can be a single comparison, such as `salary > 100`, or a combination of conditions using logical operators, like `salary > 100 AND department = 'IT'`.
+Please refer to the [Operators](#operators) section for additional options.
+
 ## HAVING
 
-# Sorting and Limiting Results
+`HAVING` is used to filter the result set after after applying [aggregate functions](#aggregate-functions).
+
+```mysql
+SELECT column1, aggregate_expression, ...
+FROM table_name
+GROUP BY column1
+HAVING aggregate_conditions;
+```
+
+The `column1` in `SELECT` and `GROUP BY` must match. It indicates the dimension used to group records.
+
+The `aggregate_expression` is an expression that applies aggregate functions, such as `COUNT(*)`.
+There can be multiple aggregate expressions in one `SELECT`.
+
+The `aggregate_conditions` is a conditional expression that involves aggregate functions, such as `COUNT(*) > 1`.
+
+> Note: `HAVING` is always used with aggregate functions and comes after `GROUP BY`.
+> In contrast, `WHERE` is used before `GROUP BY` and does not include any aggregate functions.
+
+# Sorting & Limiting
 
 ## ORDER BY
 
@@ -38,7 +96,7 @@ These concepts are frequently applied to solve common algorithmic challenges.
 
 ## OFFSET
 
-# Joining Data from Multiple Tables
+# Joining
 
 ## INNER JOIN
 
@@ -50,7 +108,7 @@ These concepts are frequently applied to solve common algorithmic challenges.
 
 ## SELF JOIN
 
-# Grouping and Aggregation
+# Grouping & Aggregation
 
 ## GROUP BY
 
@@ -62,7 +120,7 @@ These concepts are frequently applied to solve common algorithmic challenges.
 
 ### MIN / MAX
 
-# Subqueries and Derived Tables
+# Subqueries
 
 # Window Functions
 
@@ -106,7 +164,15 @@ These concepts are frequently applied to solve common algorithmic challenges.
 
 ## Conditional Aggregates
 
-# Common Table Expressions
+# Operators
+
+## Arithmetic Operators
+
+## Comparison Operators
+
+## Logical Operators
+
+## String Operators
 
 # Miscellaneous Functions
 
@@ -114,4 +180,6 @@ These concepts are frequently applied to solve common algorithmic challenges.
 
 ## Date/Time Functions
 
-# Numeric Functions
+## Numeric Functions
+
+# Common Table Expressions
