@@ -92,17 +92,47 @@ The `aggregate_conditions` is a conditional expression that involves aggregate f
 
 ## ORDER BY
 
+`ORDER BY` is used to sort the result set by one or more columns, either in ascending or descending order.
+
+```mysql
+SELECT * FROM table_name
+ORDER BY column1 [ASC|DESC], column2 [ASC|DESC];
+```
+
+You can also use aggregate functions when it's used with `GROUP BY`:
+
+```mysql
+SELECT column1, ... FROM table_name
+GROUP BY column1
+ORDER BY aggregate_expression [ASC|DESC];
+```
+
 ## LIMIT
 
+`LIMIT` is used to restrict the number of rows returned in the result set.
+
+```mysql
+SELECT * FROM table_name
+LIMIT number_of_rows;
+```
+
 ## OFFSET
+
+`OFFSET` is used to skip a specified number of rows before starting to return rows from the result set.
+It must be used together with `LIMIT`.
+
+```mysql
+SELECT * FROM table_name
+LIMIT number_of_rows OFFSET skip_rows;
+```
 
 # Joining
 
 ## INNER JOIN
 
-## LEFT / RIGHT (OUTER) JOIN
+## LEFT / RIGHT JOIN
 
-## FULL (OUTER) JOIN
+## FULL JOIN
 
 ## CROSS JOIN
 
